@@ -1,6 +1,13 @@
 package com.foreign.team.toy.store.model;
+<<<<<<<< HEAD:src/main/java/com/foreign/team/toy/store/model/Product.java
 
+========
+import jakarta.persistence.*;
+>>>>>>>> feature/model:src/main/java/com/foreign/team/toy/store/model/Products.java
 import jakarta.validation.constraints.NotBlank;
+
+
+public class Products {
 
     @Entity
     @Table(name = "products")
@@ -52,3 +59,4 @@ import jakarta.validation.constraints.NotBlank;
         }
 
     }
+}
