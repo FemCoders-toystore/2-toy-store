@@ -1,6 +1,6 @@
-import com.toy.store.model.Category;
-import com.toy.store.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+package com.foreign.team.toy.store.controller;
+import com.foreign.team.toy.store.model.Category;
+import com.foreign.team.toy.store.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +10,11 @@ import java.util.List;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @GetMapping
     public List<Category> getAllCategories() {
