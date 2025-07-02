@@ -1,4 +1,4 @@
-package model;
+package com.foreign.team.toy.store.model;
 
 import jakarta.validation.constraints.NotBlank;
 
