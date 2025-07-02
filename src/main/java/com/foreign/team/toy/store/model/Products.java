@@ -1,6 +1,9 @@
-package model;
-
+package com.foreign.team.toy.store.model;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+
+public class Products {
 
     @Entity
     @Table(name = "products")
@@ -52,3 +55,4 @@ import jakarta.validation.constraints.NotBlank;
         }
 
     }
+}
