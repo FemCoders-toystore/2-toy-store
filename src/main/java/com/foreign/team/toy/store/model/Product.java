@@ -1,62 +1,66 @@
 package com.foreign.team.toy.store.model;
-<<<<<<<< HEAD:src/main/java/com/foreign/team/toy/store/model/Product.java
 
-========
 import jakarta.persistence.*;
->>>>>>>> feature/model:src/main/java/com/foreign/team/toy/store/model/Products.java
 import jakarta.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
+@Entity
+@Table(name = "products")
+public class Product {
 
-public class Products {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Entity
-    @Table(name = "products")
-    public class Product {
+    @NotBlank(message = "Product name is required")
+    private String name;
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long Id;
+    private BigDecimal price;
+    private String imageUrl;
+    private boolean featured;
 
-        @NotBlank(message = "Product name is required")
-        private String name;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-        private double price;
-        private String imageUrl;
-        private boolean featured;
+    public Product() {
+    }
 
-        @ManyToOne
-        @JoinColumn(name = "category_id")
-        private Category category;
+    public Product(String name, BigDecimal price, String imageUrl, boolean featured) {
+        this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.featured = featured;
+    }
 
-        public Product() {
-        }
+    public Long getId() {
+        return id;
+    }
 
-        public Product(String name, Double price, String imageUrl, Boolean featured) {
-            this.name = name;
-            this.price = price;
-            this.imageUrl = imageUrl;
-            this.featured = featured;
-        }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-        public Long getId() {
-            return Id;
-        }
+    public String getName() {
+        return name;
+    }
 
-        public void setId(Long id) {
-            Id = id;
-        }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        public String getName() {
-            return name;
-        }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-        public void setName(String name) {
-            this.name = name;
-        }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-        public double getPrice() {
-            return price;
-        }
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public void setCategory(Object o) {
     }
 }
