@@ -1,15 +1,20 @@
-package model;
+package com.foreign.team.toy.store.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-    @Entity
+import java.util.List;
+
+@Entity
     @Table(name = "users")
     public class User {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
+
+        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+        private List<Cart> carts;
 
         @NotBlank(message = "Username is required")
         @Size(max = 50, message = "Username cannot exceed 50 characters")
