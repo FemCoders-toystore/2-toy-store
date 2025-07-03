@@ -3,14 +3,11 @@ package com.foreign.team.toy.store.service;
 import com.foreign.team.toy.store.exceptions.ResourceNotFoundException;
 import com.foreign.team.toy.store.model.Cart;
 import com.foreign.team.toy.store.model.CartItem;
-import com.foreign.team.toy.store.model.Product;
 import com.foreign.team.toy.store.repository.CartItemRepository;
 import com.foreign.team.toy.store.repository.CartRepository;
-import com.foreign.team.toy.store.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartItemService {
@@ -56,6 +53,18 @@ public class CartItemService {
             cartItem.setQuantity(quantity);
             return cartItemRepository.save(cartItem);
         }
+    }
+
+    public CartItem updateCartItemQuantity(Long cartItemId, Integer newQuantity) {
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new ResourceNotFoundException("CartItem not found with id: " + cartItemId));
+
+        if (newQuantity == null || newQuantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be greater than zero");
+        }
+
+        cartItem.setQuantity(newQuantity);
+        return cartItemRepository.save(cartItem);
     }
 
     public void removeCartItem(Long cartItemId) {
