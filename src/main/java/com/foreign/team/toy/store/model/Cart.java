@@ -1,3 +1,15 @@
+/**
+ * This entity acts as a snapshot of the user's shopping cart state in the database.
+ *
+ * In this project, the Cart does not handle business logic directly (e.g., adding or removing items)
+ * because we do not have a frontend that manages a dynamic cart in real time.
+ *
+ * Instead, CartItemService is responsible for adding, removing, and updating CartItems,
+ * as well as updating the total price of the Cart.
+ *
+ * This design keeps Cart as a simple container and ensures business logic is centralized
+ * in the service layer, following the KISS and SRP principles.
+ */
 package com.foreign.team.toy.store.model;
 
 import jakarta.persistence.*;

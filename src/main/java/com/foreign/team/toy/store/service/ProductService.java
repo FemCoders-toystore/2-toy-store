@@ -32,7 +32,6 @@ public class ProductService {
     public Product updateProduct(Long id, Product updatedProduct) {
         Product product = getProductById(id);
         product.setName(updatedProduct.getName());
-        // agrega aquí actualización de otros campos cuando los tengas
         return productRepository.save(product);
     }
 

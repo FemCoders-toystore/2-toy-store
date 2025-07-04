@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @Entity
-@Table (name = "Cart_Items")
+@Table (name = "cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
