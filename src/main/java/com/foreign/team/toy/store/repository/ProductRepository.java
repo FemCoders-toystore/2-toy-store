@@ -1,9 +1,10 @@
 package com.foreign.team.toy.store.repository;
 
-import com.foreign.team.toy.store.model.Category;
+import com.foreign.team.toy.store.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>{
+    boolean existsByName(String name);
 }
