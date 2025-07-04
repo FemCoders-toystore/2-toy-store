@@ -17,9 +17,10 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private BigDecimal totalPrice;
-    //@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,orphanRemoval = true)
-    //private List<CartItem> items = new ArrayList<>();
+    @Column(name = "total_price", precision = 10, scale = 2)
+    private BigDecimal totalPrice = BigDecimal.ZERO;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<CartItem> items = new ArrayList<>();
 
     public Cart(){}
 
@@ -47,11 +48,11 @@ public class Cart {
         this.totalPrice = totalPrice;
     }
 
-    /*public List<CartItem> getItems() {
+    public List<CartItem> getItems() {
         return items;
     }
 
     public void setItems(List<CartItem> items) {
         this.items = items;
-    }*/
+    }
 }

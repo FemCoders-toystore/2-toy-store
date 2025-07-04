@@ -22,8 +22,7 @@ public class CartItem {
 
     @Min(1)
     private int quantity;
-
-    @Column(name = "total_price", nullable = false)
+    @Column(name = "total_price", precision = 38, scale = 2, nullable = false)
     private BigDecimal totalPrice;
 
 //    //preguntar al cliente si le parece bien este campo
@@ -37,6 +36,10 @@ public class CartItem {
         this.quantity = quantity;
         this.product = product;
         this.totalPrice = totalPrice;
+    }
+
+    public CartItem() {
+
     }
 
     public Long getId() {
