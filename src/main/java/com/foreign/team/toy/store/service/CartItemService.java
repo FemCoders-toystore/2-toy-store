@@ -1,14 +1,18 @@
 package com.foreign.team.toy.store.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.foreign.team.toy.store.exceptions.ResourceNotFoundException;
 import com.foreign.team.toy.store.model.Cart;
 import com.foreign.team.toy.store.model.CartItem;
+import com.foreign.team.toy.store.model.Product;
 import com.foreign.team.toy.store.repository.CartItemRepository;
 import com.foreign.team.toy.store.repository.CartRepository;
+import com.foreign.team.toy.store.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
-
+import java.util.Optional;
 @Service
 public class CartItemService {
 
@@ -42,17 +46,24 @@ public class CartItemService {
 
         Optional<CartItem> existingItem = cartItemRepository.findByCartAndProduct(cart, product);
 
+        CartItem cartItem;
         if (existingItem.isPresent()) {
-            CartItem cartItem = existingItem.get();
+            cartItem = existingItem.get();
             cartItem.setQuantity(cartItem.getQuantity() + quantity);
-            return cartItemRepository.save(cartItem);
         } else {
-            CartItem cartItem = new CartItem();
+            cartItem = new CartItem();
             cartItem.setCart(cart);
             cartItem.setProduct(product);
             cartItem.setQuantity(quantity);
-            return cartItemRepository.save(cartItem);
         }
+
+        BigDecimal itemTotal = product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        cartItem.setTotalPrice(itemTotal);
+
+        cartItemRepository.save(cartItem);
+        updateCartTotalPrice(cart);
+
+        return cartItem;
     }
 
     public CartItem updateCartItemQuantity(Long cartItemId, Integer newQuantity) {
@@ -64,19 +75,38 @@ public class CartItemService {
         }
 
         cartItem.setQuantity(newQuantity);
-        return cartItemRepository.save(cartItem);
+        BigDecimal itemTotal = cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(newQuantity));
+        cartItem.setTotalPrice(itemTotal);
+
+        cartItemRepository.save(cartItem);
+        updateCartTotalPrice(cartItem.getCart());
+
+        return cartItem;
     }
 
     public void removeCartItem(Long cartItemId) {
-        if (!cartItemRepository.existsById(cartItemId)) {
-            throw new ResourceNotFoundException("CartItem not found with id: " + cartItemId);
-        }
-        cartItemRepository.deleteById(cartItemId);
+        CartItem cartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new ResourceNotFoundException("CartItem not found with id: " + cartItemId));
+
+        Cart cart = cartItem.getCart();
+
+        cartItemRepository.delete(cartItem);
+        updateCartTotalPrice(cart);
     }
 
     public List<CartItem> getCartItemsByCartId(Long cartId) {
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found with id: " + cartId));
         return cartItemRepository.findByCart(cart);
+    }
+
+    private void updateCartTotalPrice(Cart cart) {
+        List<CartItem> cartItems = cartItemRepository.findByCart(cart);
+        BigDecimal totalCartPrice = cartItems.stream()
+                .map(CartItem::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        cart.setTotalPrice(totalCartPrice);
+        cartRepository.save(cart);
     }
 }

@@ -1,12 +1,14 @@
 package com.foreign.team.toy.store.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
 import java.math.BigDecimal;
 
 @Entity
-@Table (name = "Cart_Items")
+@Table (name = "cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +16,8 @@ public class CartItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
+    @JsonBackReference
+
     private Cart cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -22,13 +26,8 @@ public class CartItem {
 
     @Min(1)
     private int quantity;
-
-    @Column(name = "total_price", nullable = false)
+    @Column(name = "total_price", precision = 38, scale = 2, nullable = false)
     private BigDecimal totalPrice;
-
-//    //preguntar al cliente si le parece bien este campo
-//    @Column(name = "unit_price", nullable = false)
-//    private BigDecimal unitePrice;
 
 
     public CartItem(Long id, Cart cart, int quantity, Product product, BigDecimal totalPrice) {
@@ -37,6 +36,10 @@ public class CartItem {
         this.quantity = quantity;
         this.product = product;
         this.totalPrice = totalPrice;
+    }
+
+    public CartItem() {
+
     }
 
     public Long getId() {

@@ -1,5 +1,8 @@
 package com.foreign.team.toy.store.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.foreign.team.toy.store.model.CartItem;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -15,11 +18,15 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
-    private BigDecimal totalPrice;
-    //@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL,orphanRemoval = true)
-    //private List<CartItem> items = new ArrayList<>();
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<CartItem> items = new ArrayList<>();
+
+    @Column(name = "total_price", precision = 10, scale = 2)
+    private BigDecimal totalPrice = BigDecimal.ZERO;  // <-- Aquí la inicializas
 
     public Cart(){}
 
@@ -47,11 +54,11 @@ public class Cart {
         this.totalPrice = totalPrice;
     }
 
-    /*public List<CartItem> getItems() {
+    public List<CartItem> getItems() {
         return items;
     }
 
     public void setItems(List<CartItem> items) {
         this.items = items;
-    }*/
+    }
 }
