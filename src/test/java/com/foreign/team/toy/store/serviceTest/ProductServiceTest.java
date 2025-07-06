@@ -1,11 +1,10 @@
-package com.foreign.team.toy.store;
+package com.foreign.team.toy.store.serviceTest;
 
 import com.foreign.team.toy.store.model.Product;
 import com.foreign.team.toy.store.repository.ProductRepository;
 import com.foreign.team.toy.store.service.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
