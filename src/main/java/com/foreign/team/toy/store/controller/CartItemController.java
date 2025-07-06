@@ -1,5 +1,6 @@
 package com.foreign.team.toy.store.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.foreign.team.toy.store.model.CartItem;
 import com.foreign.team.toy.store.service.CartItemService;
 import org.springframework.http.HttpStatus;

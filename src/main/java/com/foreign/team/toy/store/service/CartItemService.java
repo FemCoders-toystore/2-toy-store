@@ -1,5 +1,6 @@
 package com.foreign.team.toy.store.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.foreign.team.toy.store.exceptions.ResourceNotFoundException;
 import com.foreign.team.toy.store.model.Cart;
 import com.foreign.team.toy.store.model.CartItem;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class CartItemService {
 
@@ -61,7 +61,6 @@ public class CartItemService {
         cartItem.setTotalPrice(itemTotal);
 
         cartItemRepository.save(cartItem);
-
         updateCartTotalPrice(cart);
 
         return cartItem;
@@ -75,6 +74,7 @@ public class CartItemService {
             throw new IllegalArgumentException("Quantity must be greater than zero");
         }
 
+        cartItem.setQuantity(newQuantity);
         BigDecimal itemTotal = cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(newQuantity));
         cartItem.setTotalPrice(itemTotal);
 
@@ -91,7 +91,6 @@ public class CartItemService {
         Cart cart = cartItem.getCart();
 
         cartItemRepository.delete(cartItem);
-
         updateCartTotalPrice(cart);
     }
 

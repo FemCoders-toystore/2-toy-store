@@ -1,5 +1,7 @@
 package com.foreign.team.toy.store.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
@@ -14,6 +16,8 @@ public class CartItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
+    @JsonBackReference
+
     private Cart cart;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,10 +28,6 @@ public class CartItem {
     private int quantity;
     @Column(name = "total_price", precision = 38, scale = 2, nullable = false)
     private BigDecimal totalPrice;
-
-//    //preguntar al cliente si le parece bien este campo
-//    @Column(name = "unit_price", nullable = false)
-//    private BigDecimal unitePrice;
 
 
     public CartItem(Long id, Cart cart, int quantity, Product product, BigDecimal totalPrice) {
