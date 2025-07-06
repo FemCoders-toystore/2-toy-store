@@ -51,7 +51,15 @@ public class ProductService {
         }
         productRepository.deleteById(id);
     }
+
+    public List<Product> getProductsByCategory(String categoryName) {
+        if (categoryName == null || categoryName.isBlank()) {
+            return productRepository.findAll();
+        }
+        return productRepository.findByCategoryNameIgnoreCase(categoryName);
+    }
 }
+
 
 
 

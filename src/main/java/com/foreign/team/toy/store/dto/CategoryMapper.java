@@ -1,7 +1,5 @@
-package com.foreign.team.toy.store.DTOS;
+package com.foreign.team.toy.store.dto;
 
-import com.foreign.team.toy.store.DTOS.CategoryRequest;
-import com.foreign.team.toy.store.DTOS.CategoryResponse;
 import com.foreign.team.toy.store.model.Category;
 
 public class CategoryMapper {

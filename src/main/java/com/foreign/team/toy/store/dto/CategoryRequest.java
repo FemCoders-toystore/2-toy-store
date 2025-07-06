@@ -1,4 +1,4 @@
-package com.foreign.team.toy.store.DTOS;
+package com.foreign.team.toy.store.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
