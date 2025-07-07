@@ -20,11 +20,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<Product> getProducts(@RequestParam(required = false) String category){
-        if (category == null || category.isEmpty()) {
-            return productService.getAllProducts();
+    public List<Product> getProducts(@RequestParam(required = false) String category) {
+        if (category != null) {
+            return productService.getProductsByCategory(category);
         }
-        return productService.getProductsByCategory(category);
+        return productService.getAllProducts();
     }
 
     @GetMapping("/{id}")
@@ -41,7 +41,6 @@ public class ProductController {
     public Product updateProduct(@PathVariable Long id, @RequestBody @Valid Product product) throws ResourceNotFoundException {
         return productService.updateProduct(id, product);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) throws ResourceNotFoundException {
         productService.deleteProduct(id);

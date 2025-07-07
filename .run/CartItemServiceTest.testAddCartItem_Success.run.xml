@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CartItemServiceTest.testAddCartItem_Success" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="2-toy-store" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.foreign.team.toy.store.serviceTest.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="com.foreign.team.toy.store.serviceTest" />
+    <option name="MAIN_CLASS_NAME" value="com.foreign.team.toy.store.serviceTest.CartItemServiceTest" />
+    <option name="METHOD_NAME" value="testAddCartItem_Success" />
+    <option name="TEST_OBJECT" value="method" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
