@@ -49,7 +49,8 @@ com.foreign.team.toy.store
 | Categories | Manage categories              | `/api/categories`     |
 | Carts      | Manage shopping carts          | `/api/carts`          |
 
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/1fbdbb33-08bf-4803-9423-0d2cd9fd3618)
+
 ---
 
 ## 🛡️ Validations & Error Handling
