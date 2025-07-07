@@ -31,7 +31,7 @@ public class User {
 
     // Un usuario puede tener varios carritos (simulación en backend)
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference  // para evitar ciclos JSON al serializar User con sus carts
+    @JsonManagedReference
     private List<Cart> carts = new ArrayList<>();
 
     public User() {
@@ -42,8 +42,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
-    // Getters y setters
 
     public Long getId() {
         return id;
@@ -85,7 +83,6 @@ public class User {
         this.carts = carts;
     }
 
-    // Puedes agregar métodos auxiliares para manejar la relación bidireccional
 
     public void addCart(Cart cart) {
         carts.add(cart);
