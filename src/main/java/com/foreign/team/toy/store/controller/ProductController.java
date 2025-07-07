@@ -41,7 +41,6 @@ public class ProductController {
     public Product updateProduct(@PathVariable Long id, @RequestBody @Valid Product product) throws ResourceNotFoundException {
         return productService.updateProduct(id, product);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) throws ResourceNotFoundException {
         productService.deleteProduct(id);
