@@ -13,13 +13,14 @@ public class CartItemMapper {
         return cartItem;
     }
 
-    public static CartItemResponse toResponse(CartItem cartItem) {
+    public static CartItemResponse toCartItemResponse(CartItem cartItem) {
         return new CartItemResponse(
                 cartItem.getId(),
-                cartItem.getCart() != null ? cartItem.getCart().getId() : null,
                 cartItem.getProduct() != null ? cartItem.getProduct().getId() : null,
+                cartItem.getProduct() != null ? cartItem.getProduct().getName() : null,
                 cartItem.getQuantity(),
                 cartItem.getTotalPrice()
         );
     }
+
 }
