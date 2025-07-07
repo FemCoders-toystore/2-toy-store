@@ -34,7 +34,7 @@ class ProductServiceTest {
 
         Product product2 = new Product();
         product2.setId(2L);
-        product2.setName("Robot");
+        product2.setName("Puzzle");
         product2.setPrice(BigDecimal.valueOf(49.99));
 
         when(productRepository.findAll()).thenReturn(Arrays.asList(product1, product2));
