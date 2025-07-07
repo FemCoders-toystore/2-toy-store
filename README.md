@@ -19,7 +19,6 @@ Build a RESTful API to manage users, products, categories, and shopping carts in
 - MySQL
 - Jakarta Validation
 - Lombok (optional)
-- Swagger (API Documentation)
 - JUnit (Testing)
 - Maven
 - Git & GitHub
@@ -59,15 +58,6 @@ com.foreign.team.toy.store
 - Centralized error handling with custom exception handlers.
 - Security best practices for endpoints (to be implemented).
 
----
-
-## 🧪 Testing
-
-- Unit and integration tests with JUnit and Mockito.
-- Minimum test coverage: 80% of service layer.
-
----
-
 ## 🗃️ Git Version Control Strategy (Simplified Git Flow)
 
 - `main`: Main production branch (final deliveries).
@@ -84,7 +74,7 @@ com.foreign.team.toy.store
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-user/toy-store.git
+git clone https://github.com/your-user/2-toy-store.git
 ```
 
 2. Configure the database in `application.properties`.
@@ -93,15 +83,6 @@ git clone https://github.com/your-user/toy-store.git
 
 ```bash
 mvn spring-boot:run
-```
-
-4. Access Swagger at:
-
-```
-http://localhost:8080/swagger-ui/index.html
-```
-
----
 
 ## 🤝 Development Team
 
